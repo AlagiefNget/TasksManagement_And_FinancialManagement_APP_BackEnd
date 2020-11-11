@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :todos
+      
+      resources :todos do
+        collection do
+          put 'mark_as_complete'
+          get 'get_todos_count'
+        end
+      end
+
     end
   end
 

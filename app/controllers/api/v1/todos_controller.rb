@@ -1,6 +1,6 @@
 class Api::V1::TodosController < ApplicationController
   def index
-    todos = Todo.order('scheduled_at DESC')
+    todos = Todo.order('date ASC')
     render json:{data: todos}
   end
 
@@ -90,6 +90,31 @@ class Api::V1::TodosController < ApplicationController
       render json: {error: true, errors: errors}
     end
 
+  end
+
+  def mark_as_complete
+    errors = []
+    errors << 'Please specify task to mark as complete' if params[:todo_id].blank?
+
+    if errors.empty?
+      begin
+        todo = Todo.find(params[:todo_id])
+        todo.status = 'Completed'
+
+        todo.save!
+        render json: {success: 'Todo successfully completed', task: todo}
+      rescue Exception => e
+        errors << e.message
+        render json: {error: true, errors: errors}
+      end    
+    else
+      render json: {error: true, errors: errors}
+    end
+  end
+
+  def get_todos_count
+    todos = Todo.where.not(status: 'Completed').count
+    render json: {_count: todos}
   end
 
 end

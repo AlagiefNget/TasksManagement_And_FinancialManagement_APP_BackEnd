@@ -1,5 +1,7 @@
 
-class AuthorizeApiRequest
+require 'security/json_web_token'
+
+class Api::V1::AuthorizeApiRequest < ApplicationController
     prepend SimpleCommand
   
     def initialize(headers = {})
@@ -20,7 +22,8 @@ class AuthorizeApiRequest
     end
   
     def decoded_auth_token
-      @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+      # @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+      @decoded_auth_token ||= Security::JsonWebToken.decode(http_auth_header)
     end
   
     def http_auth_header

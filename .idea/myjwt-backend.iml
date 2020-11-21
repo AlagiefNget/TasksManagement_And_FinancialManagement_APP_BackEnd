@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="JRUBY" name="JRuby">
       <configuration>
-        <JRUBY_FACET_CONFIG_ID NAME="JRUBY_SDK_NAME" VALUE="" />
+        <JRUBY_FACET_CONFIG_ID NAME="JRUBY_SDK_NAME" VALUE="jruby" />
         <LOAD_PATH number="0" />
         <I18N_FOLDERS number="0" />
       </configuration>
@@ -33,10 +33,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="jruby-9.1.17.0-p0 facet library" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.1.4, jruby-9.1.17.0-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack (v2.2.3, jruby-9.1.17.0-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack-cors (v1.1.1, jruby-9.1.17.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jruby facet library" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.15, jruby) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.1.4, jruby) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jwt (v2.2.2, jruby) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v2.2.3, jruby) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-cors (v1.1.1, jruby) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simple_command (v0.1.0, jruby) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />

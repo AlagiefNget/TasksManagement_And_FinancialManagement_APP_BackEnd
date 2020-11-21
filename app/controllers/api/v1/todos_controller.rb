@@ -1,6 +1,8 @@
 class Api::V1::TodosController < ApplicationController
+
   def index
-    todos = Todo.order('date ASC')
+    # todos = Todo.where(user_id: @current_user.id).order('task ASC')
+    todos = @current_user.todos.order('date ASC')
     render json:{data: todos}
   end
 
@@ -15,6 +17,8 @@ class Api::V1::TodosController < ApplicationController
         todo.scheduled_at = params[:scheduled_at] if params[:scheduled_at]
         todo.date = params[:date] if params[:date]
         todo.status = params[:status] if params[:status]
+
+        todo.user = @current_user
 
         todo.save!
         render json: {success: 'Task successfully saved', task: todo}
@@ -113,7 +117,8 @@ class Api::V1::TodosController < ApplicationController
   end
 
   def get_todos_count
-    todos = Todo.where.not(status: 'Completed').count
+    # todos = Todo.where.not(status: 'Completed').count
+    todos = @current_user.todos.where.not(status: 'Completed').count
     render json: {_count: todos}
   end
 

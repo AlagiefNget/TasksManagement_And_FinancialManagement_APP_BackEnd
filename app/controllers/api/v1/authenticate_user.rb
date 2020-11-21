@@ -1,4 +1,6 @@
-class AuthenticateUser
+require 'security/json_web_token'
+
+class Api::V1::AuthenticateUser
     prepend SimpleCommand
   
     def initialize(email, password)
@@ -7,7 +9,8 @@ class AuthenticateUser
     end
   
     def call
-      JsonWebToken.encode(user_id: user.id) if user
+      _user = user
+      {token: Security::JsonWebToken.encode(user_id: _user.id), user: _user} if _user
     end
   
     private
@@ -21,4 +24,5 @@ class AuthenticateUser
       errors.add :user_authentication, 'invalid credentials'
       nil
     end
+
   end

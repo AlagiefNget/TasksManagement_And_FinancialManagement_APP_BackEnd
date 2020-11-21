@@ -3,7 +3,7 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="false" project-jdk-name="jruby-9.1.17.0-p0" project-jdk-type="JRUBY_SDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="false" project-jdk-name="jruby" project-jdk-type="JRUBY_SDK">
     <output url="file://$PROJECT_DIR$" />
   </component>
 </project>

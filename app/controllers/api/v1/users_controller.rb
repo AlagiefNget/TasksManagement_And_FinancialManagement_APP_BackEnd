@@ -22,8 +22,9 @@ class Api::V1::UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         begin
-            @user.send(params[:method].to_sym)
-            render json: {success: 'User information successfully updated'}
+            # @user.send(params[:method].to_sym)
+            user = @user.update_user(params[:user])
+            render json: {success: 'User information successfully updated', user: user}
         rescue Exception => error
             render json: {error: true, errors:[error.message]}
         end
@@ -34,29 +35,18 @@ class Api::V1::UsersController < ApplicationController
         render json: {user: @user}
     end
 
-    # def login
-    #     @user = User.find_by_email(params[:email])
-
-    #     if @user.status == 1
-    #         render json: {error: true, errors: ["Account is blocked, please refer to admin to ublock your account!"]}
-    #     elsif @user && @user.authenticate(params[:password])
-    #         token = encode_token({user_id: @user.id})
-    #         result = {
-    #             user: @user.slice(:id, :first_name, :middle_name, :last_name, :email, :phone_number),
-    #             token: token
-    #         }
-
-    #         render json: {'You are successfully logged in', user: result}
-    #     else
-    #         render json: {error: true,  errors:["Invalid username or password"]}
-    #     end
-
-    # end
-
-    # def auto_login
-    #     render json:{user: @user}
-    # end
-
+    def reset_password
+        user = User.find(params[:user_id])
+        begin
+            user.password = params[:new_password] if params[:new_password]
+            user.password_confirmation = params[:password_confirmation] if params[:password_confirmation]
+            
+            user.save!
+            render json: {success: 'Password reset successful', user: user}
+        rescue Exception => error
+            render json: {error: true, errors:[error.message]}
+        end
+    end
 
     private
 

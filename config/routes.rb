@@ -11,7 +11,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :users
+      resources :users do
+        collection do
+          put 'reset_password'
+        end
+      end
 
     end
   end

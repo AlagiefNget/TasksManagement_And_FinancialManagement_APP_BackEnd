@@ -29,6 +29,7 @@ class User < ApplicationRecord
         self.phone_number = params[:phone_number] if(params[:phone_number])
 
         self.save!
+        self
     end
 
 end

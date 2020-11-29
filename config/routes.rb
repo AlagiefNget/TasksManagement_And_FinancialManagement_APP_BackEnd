@@ -17,6 +17,10 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :clients
+      resources :projects
+
+
     end
   end
 

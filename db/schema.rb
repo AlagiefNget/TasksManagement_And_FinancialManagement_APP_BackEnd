@@ -10,7 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_234509) do
+ActiveRecord::Schema.define(version: 2020_11_29_225305) do
+
+  create_table "charges", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "currency"
+    t.float "amount"
+    t.float "balance"
+    t.date "due_date"
+    t.string "project_name"
+    t.string "client_name"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_charges_on_project_id"
+  end
+
+  create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone_number"
+    t.string "address"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "currency"
+    t.float "amount"
+    t.float "balance"
+    t.date "payment_date"
+    t.string "project_name"
+    t.string "client_name"
+    t.bigint "charge_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["charge_id"], name: "index_payments_on_charge_id"
+  end
+
+  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name"
+    t.string "due_date"
+    t.string "client_name"
+    t.string "status"
+    t.text "description"
+    t.bigint "client_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.float "amount"
+    t.float "balance"
+    t.index ["client_id"], name: "index_projects_on_client_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
 
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "task"
@@ -35,4 +88,9 @@ ActiveRecord::Schema.define(version: 2020_11_15_234509) do
     t.index ["first_name"], name: "index_users_on_first_name"
   end
 
+  add_foreign_key "charges", "projects"
+  add_foreign_key "clients", "users"
+  add_foreign_key "payments", "charges"
+  add_foreign_key "projects", "clients"
+  add_foreign_key "projects", "users"
 end

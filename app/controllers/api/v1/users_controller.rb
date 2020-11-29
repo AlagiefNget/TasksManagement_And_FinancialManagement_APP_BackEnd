@@ -36,10 +36,15 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def reset_password
+        errors = []
+        errors << 'Please specify user to reset password for' if params[:user][:user_id].blank?
+        errors << "You must specify a password" if params[:user][:new_password].blank?
+        errors << "You must confirm your password" if params[:user][:password_confirmation].blank?
+        errors << "Your passwords do not match" if(params[:user][:new_password] and params[:password_confirmation] and !params[:new_password].eql?(params[:password_confirmation]))
+
         user = User.find(params[:user_id])
         begin
-            user.password = params[:new_password] if params[:new_password]
-            user.password_confirmation = params[:password_confirmation] if params[:password_confirmation]
+            user.password = params[:user][:new_password] if params[:user][:new_password]
             
             user.save!
             render json: {success: 'Password reset successful', user: user}

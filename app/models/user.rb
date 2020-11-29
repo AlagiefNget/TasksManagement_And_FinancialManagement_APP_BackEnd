@@ -2,6 +2,8 @@ class User < ApplicationRecord
     has_secure_password
     
     has_many :todos 
+    has_many :projects
+    has_many :clients
 
 
     def self.create_user(params)

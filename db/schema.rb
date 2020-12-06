@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_29_225305) do
+ActiveRecord::Schema.define(version: 2020_12_06_090810) do
 
   create_table "charges", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "currency"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_11_29_225305) do
     t.bigint "user_id", null: false
     t.float "amount"
     t.float "balance"
+    t.string "currency"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end

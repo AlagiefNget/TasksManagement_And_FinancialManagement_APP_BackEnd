@@ -18,7 +18,13 @@ Rails.application.routes.draw do
       end
 
       resources :clients
-      resources :projects
+      resources :projects do
+        collection do
+          put 'mark_as_complete'
+          get 'get_tiles_data'
+        end
+      end
+
 
 
     end

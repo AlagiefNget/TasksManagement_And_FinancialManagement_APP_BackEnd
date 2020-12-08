@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_06_090810) do
+ActiveRecord::Schema.define(version: 2020_12_08_003420) do
 
   create_table "charges", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "currency"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 2020_12_06_090810) do
     t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "discount"
+    t.bigint "client_id", null: false
+    t.index ["client_id"], name: "index_charges_on_client_id"
     t.index ["project_id"], name: "index_charges_on_project_id"
   end
 
@@ -89,6 +92,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_090810) do
     t.index ["first_name"], name: "index_users_on_first_name"
   end
 
+  add_foreign_key "charges", "clients"
   add_foreign_key "charges", "projects"
   add_foreign_key "clients", "users"
   add_foreign_key "payments", "charges"

@@ -79,12 +79,13 @@ class Api::V1::ProjectsController < ApplicationController
   
     def show
       errors = []
-      project = Project.find(params[:id])
-      errors << 'Project specified does not exist' if project.nil?
+      # errors << 'Project specified does not exist' if project.nil?
   
       if errors.empty?
         begin
-          render json:{project: project, success: 'Project successfully loaded'}
+          project = Project.find(params[:id])
+          
+          render json:{data: project, success: 'Project successfully loaded'}
         rescue Exception => e
           errors << e.message
           render json: {error: true, errors: errors}

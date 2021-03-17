@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: 2021-03-17
+  actual_amount: 1.5
+  budgeted_amount: 1.5
+  difference: 1.5
+  account: MyString
+  expense_category: one
+
+two:
+  name: MyString
+  date: 2021-03-17
+  actual_amount: 1.5
+  budgeted_amount: 1.5
+  difference: 1.5
+  account: MyString
+  expense_category: two
